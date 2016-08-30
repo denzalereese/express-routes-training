@@ -22,13 +22,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES
 // Root Route
+app.get('/', function(req, res){
+  res.sendFile('views/index.html', {root: __dirname});
+})
 
 
 // Gallery View Route
 
 
 // The Number Guessing Game
+app.get('/pick-a-number/', function(req, res) {
+  var number = req.query.number;
 
+  if (number < 10) {
+    res.send('Too low!');
+   }
+  else if (number == 10) {
+    res.send('Nailed it!');
+  }
+  else if (number > 10) {
+    res.send('Too high!');
+  }
+});
 
 // Gallery
 

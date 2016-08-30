@@ -46,7 +46,40 @@ app.get('/pick-a-number/', function(req, res) {
 });
 
 // Gallery
+var artworks = [{
+  title: "Swans Reflecting Elephants",
+  artist: "Salvador Dali",
+  description: "Dope."
+}, {
+  title: "The Face of War",
+  artist: "Salvador Dali",
+  description: "Dope."
+}, {
+  title: "The Persistence of Memory",
+  artist: "Salvador Dali",
+  description: "Dope."
+}, {
+  title: "The Burning Giraffe",
+  artist: "Salvador Dali",
+  description: "Dope."
+}];
 
+app.get("/api/artworks", function(req, res) {
+  res.json(artworks);
+})
+
+app.post("/api/artworks", function artworkCreate(req, res) {
+  var title = req.body.title;
+  var artist = req.body.artist;
+  var description = req.body.description;
+  var newArtwork = {title: title, artist: artist, description: description};
+  artworks.push(newArtwork);
+  res.json(artworks);
+})
+
+app.get("/art-gallery", function(req, res) {
+  res.sendFile("views/art-gallery.html", {root: __dirname});
+})
 
 // SERVER START
 var port = 3000;
